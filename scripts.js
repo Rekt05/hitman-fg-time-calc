@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   try {
     await navigator.clipboard.writeText(fullLink);
-    alert("Link copied to clipboard!");
+    alert(fullLink+"has been copied to clipboard!");
   } catch (err) {
     prompt("Couldn't auto-copy. Please copy manually:", fullLink);
   }
@@ -203,6 +203,21 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+//dark/light mode togglee
+function toggleDarkMode() {
+    document.body.classList.toggle('light-mode');
+    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+}
+
+(function () {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+        document.body.classList.add('light-mode');
+    }
+})();
+
+
 
 
 
