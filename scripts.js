@@ -96,7 +96,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const levels = levelData[button.textContent];
       if (!levels) return;
 
-      const currentCount = parseInt(localStorage.getItem("rowCount") || "40", 10);
+      let currentCount = parseInt(localStorage.getItem("rowCount") || "40", 10);
+
+      if (levels.length > currentCount) {
+        currentCount = levels.length;
+        localStorage.setItem("rowCount", currentCount);
+        rowCountInput.value = currentCount;
+        generateRows(currentCount);
+      }
+
       for (let i = 1; i <= currentCount; i++) {
         const levelInput = document.querySelector(`input[name="level${i}"]`);
         if (levelInput) levelInput.value = "";
