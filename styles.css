@@ -115,3 +115,13 @@ body.light-mode a, body.light-mode a:visited {
   text-decoration: underline;
 }
 
+.explain {
+  font-weight: bold;
+  cursor: help;
+  color: rgb(255, 0, 0);
+}
+
+body.light-mode .explain {
+  color: blue;
+}
+
