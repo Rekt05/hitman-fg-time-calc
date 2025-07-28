@@ -218,22 +218,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const levels = urlParams.get("levels");
 
   if (times && levels) {
-    const timesArray = times.split(",");
-    const levelsArray = levels.split(",");
+  const timesArray = times.split(",").map(decodeURIComponent);
+  const levelsArray = levels.split(",").map(decodeURIComponent);
+  const requiredCount = Math.max(timesArray.length, levelsArray.length);
 
-    const currentCount = parseInt(localStorage.getItem("rowCount") || "40", 10);
-    for (let i = 1; i <= currentCount; i++) {
-      const t = decodeURIComponent(timesArray[i] || "");
-      const ln = decodeURIComponent(levelsArray[i] || "");
-      document.getElementById(`t${i + 1}`).value = t;
-      document.getElementById(`ln${i + 1}`).value = ln;
-
-      //trigger ct calc
-      if (t) {
-        document.getElementById(`t${i + 1}`).dispatchEvent(new Event("input"));
-      }
-    }
+  const savedCount = parseInt(localStorage.getItem("rowCount") || "40", 10);
+  if (requiredCount > savedCount) {
+    localStorage.setItem("rowCount", requiredCount);
+    rowCountInput.value = requiredCount;
+    generateRows(requiredCount);
   }
+
+  for (let i = 0; i < requiredCount; i++) {
+    const t = timesArray[i] || "";
+    const ln = levelsArray[i] || "";
+
+    const timeInput = document.getElementById(`t${i + 1}`);
+    const levelInput = document.getElementById(`ln${i + 1}`);
+    if (timeInput) timeInput.value = t;
+    if (levelInput) levelInput.value = ln;
+
+    if (t) timeInput?.dispatchEvent(new Event("input"));
+  }
+}
 
 });
 
