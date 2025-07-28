@@ -104,3 +104,14 @@ body.light-mode table tbody tr td:nth-child(2) input {
     color: #555;
     border: 1px solid #aaa;
 }
+
+a, a:visited {
+  color: white;
+}
+
+
+body.light-mode a, body.light-mode a:visited {
+  color: blue;
+  text-decoration: underline;
+}
+
