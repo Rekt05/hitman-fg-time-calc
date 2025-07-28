@@ -22,6 +22,9 @@
             <button id="btnClearAll">Clear All Fields</button>
             <button id="btnSaveLink">Save as Link</button>
             <button onclick="toggleDarkMode()">Toggle Dark/Light Mode</button>
+            <label for="rowCount">Number of Fields:</label>
+            <input type="number" id="rowCount" min="1" max="100" value="40" />
+
             <p>Made by @Rekt05 on discord for fun, dm for suggestions or questions            
             </br></br>Inspired by Solderq35's <a href="https://github.com/solderq35/fg-time-calc" target="_blank" rel="noopener noreferrer">time calc</a></p>
         </div>
@@ -36,47 +39,7 @@
                         <th>Level Name</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr><td><input type="text" name="time1" id="t1" /></td><td><input type="text" name="cumulative1" id="cumulative1" readonly /></td><td><input type="text" name="level1" id="ln1" /></td></tr>
-                    <tr><td><input type="text" name="time2" id="t2" /></td><td><input type="text" name="cumulative2" id="cumulative2" readonly /></td><td><input type="text" name="level2" id="ln2" /></td></tr>
-                    <tr><td><input type="text" name="time3" id="t3" /></td><td><input type="text" name="cumulative3" id="cumulative3" readonly /></td><td><input type="text" name="level3" id="ln3" /></td></tr>
-                    <tr><td><input type="text" name="time4" id="t4" /></td><td><input type="text" name="cumulative4" id="cumulative4" readonly /></td><td><input type="text" name="level4" id="ln4" /></td></tr>
-                    <tr><td><input type="text" name="time5" id="t5" /></td><td><input type="text" name="cumulative5" id="cumulative5" readonly /></td><td><input type="text" name="level5" id="ln5" /></td></tr>
-                    <tr><td><input type="text" name="time6" id="t6" /></td><td><input type="text" name="cumulative6" id="cumulative6" readonly /></td><td><input type="text" name="level6" id="ln6" /></td></tr>
-                    <tr><td><input type="text" name="time7" id="t7" /></td><td><input type="text" name="cumulative7" id="cumulative7" readonly /></td><td><input type="text" name="level7" id="ln7" /></td></tr>
-                    <tr><td><input type="text" name="time8" id="t8" /></td><td><input type="text" name="cumulative8" id="cumulative8" readonly /></td><td><input type="text" name="level8" id="ln8" /></td></tr>
-                    <tr><td><input type="text" name="time9" id="t9" /></td><td><input type="text" name="cumulative9" id="cumulative9" readonly /></td><td><input type="text" name="level9" id="ln9" /></td></tr>
-                    <tr><td><input type="text" name="time10" id="t10" /></td><td><input type="text" name="cumulative10" id="cumulative10" readonly /></td><td><input type="text" name="level10" id="ln10" /></td></tr>
-                    <tr><td><input type="text" name="time11" id="t11" /></td><td><input type="text" name="cumulative11" id="cumulative11" readonly /></td><td><input type="text" name="level11" id="ln11" /></td></tr>
-                    <tr><td><input type="text" name="time12" id="t12" /></td><td><input type="text" name="cumulative12" id="cumulative12" readonly /></td><td><input type="text" name="level12" id="ln12" /></td></tr>
-                    <tr><td><input type="text" name="time13" id="t13" /></td><td><input type="text" name="cumulative13" id="cumulative13" readonly /></td><td><input type="text" name="level13" id="ln13" /></td></tr>
-                    <tr><td><input type="text" name="time14" id="t14" /></td><td><input type="text" name="cumulative14" id="cumulative14" readonly /></td><td><input type="text" name="level14" id="ln14" /></td></tr>
-                    <tr><td><input type="text" name="time15" id="t15" /></td><td><input type="text" name="cumulative15" id="cumulative15" readonly /></td><td><input type="text" name="level15" id="ln15" /></td></tr>
-                    <tr><td><input type="text" name="time16" id="t16" /></td><td><input type="text" name="cumulative16" id="cumulative16" readonly /></td><td><input type="text" name="level16" id="ln16" /></td></tr>
-                    <tr><td><input type="text" name="time17" id="t17" /></td><td><input type="text" name="cumulative17" id="cumulative17" readonly /></td><td><input type="text" name="level17" id="ln17" /></td></tr>
-                    <tr><td><input type="text" name="time18" id="t18" /></td><td><input type="text" name="cumulative18" id="cumulative18" readonly /></td><td><input type="text" name="level18" id="ln18" /></td></tr>
-                    <tr><td><input type="text" name="time19" id="t19" /></td><td><input type="text" name="cumulative19" id="cumulative19" readonly /></td><td><input type="text" name="level19" id="ln19" /></td></tr>
-                    <tr><td><input type="text" name="time20" id="t20" /></td><td><input type="text" name="cumulative20" id="cumulative20" readonly /></td><td><input type="text" name="level20" id="ln20" /></td></tr>
-                    <tr><td><input type="text" name="time21" id="t21" /></td><td><input type="text" name="cumulative21" id="cumulative21" readonly /></td><td><input type="text" name="level21" id="ln21" /></td></tr>
-                    <tr><td><input type="text" name="time22" id="t22" /></td><td><input type="text" name="cumulative22" id="cumulative22" readonly /></td><td><input type="text" name="level22" id="ln22" /></td></tr>
-                    <tr><td><input type="text" name="time23" id="t23" /></td><td><input type="text" name="cumulative23" id="cumulative23" readonly /></td><td><input type="text" name="level23" id="ln23" /></td></tr>
-                    <tr><td><input type="text" name="time24" id="t24" /></td><td><input type="text" name="cumulative24" id="cumulative24" readonly /></td><td><input type="text" name="level24" id="ln24" /></td></tr>
-                    <tr><td><input type="text" name="time25" id="t25" /></td><td><input type="text" name="cumulative25" id="cumulative25" readonly /></td><td><input type="text" name="level25" id="ln25" /></td></tr>
-                    <tr><td><input type="text" name="time26" id="t26" /></td><td><input type="text" name="cumulative26" id="cumulative26" readonly /></td><td><input type="text" name="level26" id="ln26" /></td></tr>
-                    <tr><td><input type="text" name="time27" id="t27" /></td><td><input type="text" name="cumulative27" id="cumulative27" readonly /></td><td><input type="text" name="level27" id="ln27" /></td></tr>
-                    <tr><td><input type="text" name="time28" id="t28" /></td><td><input type="text" name="cumulative28" id="cumulative28" readonly /></td><td><input type="text" name="level28" id="ln28" /></td></tr>
-                    <tr><td><input type="text" name="time29" id="t29" /></td><td><input type="text" name="cumulative29" id="cumulative29" readonly /></td><td><input type="text" name="level29" id="ln29" /></td></tr>
-                    <tr><td><input type="text" name="time30" id="t30" /></td><td><input type="text" name="cumulative30" id="cumulative30" readonly /></td><td><input type="text" name="level30" id="ln30" /></td></tr>
-                    <tr><td><input type="text" name="time31" id="t31" /></td><td><input type="text" name="cumulative31" id="cumulative31" readonly /></td><td><input type="text" name="level31" id="ln31" /></td></tr>
-                    <tr><td><input type="text" name="time32" id="t32" /></td><td><input type="text" name="cumulative32" id="cumulative32" readonly /></td><td><input type="text" name="level32" id="ln32" /></td></tr>
-                    <tr><td><input type="text" name="time33" id="t33" /></td><td><input type="text" name="cumulative33" id="cumulative33" readonly /></td><td><input type="text" name="level33" id="ln33" /></td></tr>
-                    <tr><td><input type="text" name="time34" id="t34" /></td><td><input type="text" name="cumulative34" id="cumulative34" readonly /></td><td><input type="text" name="level34" id="ln34" /></td></tr>
-                    <tr><td><input type="text" name="time35" id="t35" /></td><td><input type="text" name="cumulative35" id="cumulative35" readonly /></td><td><input type="text" name="level35" id="ln35" /></td></tr>
-                    <tr><td><input type="text" name="time36" id="t36" /></td><td><input type="text" name="cumulative36" id="cumulative36" readonly /></td><td><input type="text" name="level36" id="ln36" /></td></tr>
-                    <tr><td><input type="text" name="time37" id="t37" /></td><td><input type="text" name="cumulative37" id="cumulative37" readonly /></td><td><input type="text" name="level37" id="ln37" /></td></tr>
-                    <tr><td><input type="text" name="time38" id="t38" /></td><td><input type="text" name="cumulative38" id="cumulative38" readonly /></td><td><input type="text" name="level38" id="ln38" /></td></tr>
-                    <tr><td><input type="text" name="time39" id="t39" /></td><td><input type="text" name="cumulative39" id="cumulative39" readonly /></td><td><input type="text" name="level39" id="ln39" /></td></tr>
-                    <tr><td><input type="text" name="time40" id="t40" /></td><td><input type="text" name="cumulative40" id="cumulative40" readonly /></td><td><input type="text" name="level40" id="ln40" /></td></tr>
+                <tbody id="tableBody">
                 </tbody>
 
 
