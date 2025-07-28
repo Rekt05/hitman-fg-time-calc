@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
   for (let i = 1; i <= count; i++) {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td><input type="text" name="time${i}" id="t${i}" value="${oldTimes[i] || ""}" /></td>
+      <td><input type="text" name="time${i}" id="t${i}" value="${oldTimes[i] || ""}" data-mapname="${oldLevels[i] || ""}" /></td>
       <td><input type="text" name="cumulative${i}" id="cumulative${i}" readonly /></td>
       <td><input type="text" name="level${i}" id="ln${i}" value="${oldLevels[i] || ""}" /></td>
     `;
@@ -73,6 +73,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   bindDynamicEvents();
   updateTimes();
+
+  for (let i = 1; i <= count; i++) {
+  const timeInput = document.getElementById(`t${i}`);
+  const levelInput = document.getElementById(`ln${i}`);
+  if (timeInput && levelInput) {
+    timeInput.dataset.mapname = levelInput.value.trim();
+  }
+}
 }
 
 
@@ -102,8 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
         currentCount = levels.length;
         localStorage.setItem("rowCount", currentCount);
         rowCountInput.value = currentCount;
-        generateRows(currentCount);
       }
+      generateRows(currentCount);
 
       for (let i = 1; i <= currentCount; i++) {
         const levelInput = document.querySelector(`input[name="level${i}"]`);
@@ -114,6 +122,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const levelInput = document.querySelector(`input[name="level${index + 1}"]`);
         if (levelInput) levelInput.value = levelName;
       });
+
+      for (let i = 1; i <= currentCount; i++) {
+      const timeInput = document.getElementById(`t${i}`);
+      const levelInput = document.getElementById(`ln${i}`);
+      if (timeInput && levelInput) {
+        timeInput.dataset.mapname = levelInput.value.trim();
+      }}
     });
   });
 
@@ -248,6 +263,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (t) timeInput?.dispatchEvent(new Event("input"));
   }
+  
+  for (let i = 1; i <= requiredCount; i++) {
+  const timeInput = document.getElementById(`t${i}`);
+  const levelInput = document.getElementById(`ln${i}`);
+  if (timeInput && levelInput) {
+    timeInput.dataset.mapname = levelInput.value.trim();
+  }
+}
+
 }
 
 });
@@ -264,3 +288,42 @@ function toggleDarkMode() {
         document.body.classList.add('light-mode');
     }
 })();
+
+//fast inputting toggle
+document.addEventListener("DOMContentLoaded", function () {
+  const fastInputToggle = document.getElementById("fastInputToggle");
+  const savedFastInput = localStorage.getItem("fastSplits") === "true";
+  fastInputToggle.checked = savedFastInput;
+
+  fastInputToggle.addEventListener("change", function () {
+    localStorage.setItem("fastSplits", fastInputToggle.checked);
+  });
+});
+
+const mapTimeExpectations = {
+  "Paris": 2, "Sapienza": 2, "Marrakesh": 2, "Bangkok": 2, "Colorado": 2, "Hokkaido": 2,
+  "Hawke's Bay": 3, "Miami": 2, "Santa Fortuna": 3, "Mumbai": 3, "Whittleton Creek": 3,
+  "Ambrose Island": 2, "Isle of Sgàil": 2, "New York": 3, "Haven Island": 2, "Dubai": 2,
+  "Dartmoor": 2, "Berlin": 2, "Chongqing": 2, "Mendoza": 2, "Romania": 3
+};
+
+document.addEventListener("keyup", function (e) {
+  const fastInputToggle = document.getElementById("fastInputToggle");
+  if (!fastInputToggle || !fastInputToggle.checked) return;
+  if (e.target.tagName !== "INPUT" || e.target.type !== "text") return;
+
+  const currentInput = e.target;
+  const mapName = currentInput.dataset.mapname;
+  const expectedDigits = mapTimeExpectations[mapName];
+
+  if (!expectedDigits) return;
+
+  const digitsOnly = currentInput.value.replace(/\D/g, "");
+  if (digitsOnly.length === expectedDigits) {
+    const allInputs = [...document.querySelectorAll('input[name^="time"]')];
+    const currentIndex = allInputs.indexOf(currentInput);
+    if (currentIndex !== -1 && currentIndex + 1 < allInputs.length) {
+      allInputs[currentIndex + 1].focus();
+    }
+  }
+});
