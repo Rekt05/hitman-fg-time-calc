@@ -432,7 +432,7 @@ function toggleMSMode() {
   msMode = !msMode;
   localStorage.setItem("msMode", msMode);
   const alertMsg = msMode ? "on" : "off";
-  alert(`Millisecond mode has now been turned ${alertMsg}, THIS IS A BETA VERSION OF MS MODE: currently this only works correctly when you insert a 5 star time under 5 minutes, just insert the score into the time column ex. 206107, resets are also not properly accounted for, if you save a link with ex. 12 it will convert it automatically to its exact score counterpart, but if you insert ex. 13 there is no exact score counterpart to it will add incorrect variance`);
+  alert(`Millisecond mode has now been turned ${alertMsg}, THIS IS A BETA VERSION OF MS MODE: currently this only works correctly when you insert a 5 star time under 5 minutes, just insert the score into the time column ex. 206107, resets are also not properly accounted for, if you save a link with ex. 12 it will convert it automatically to its exact score counterpart, but if you insert ex. 13 there is no exact score counterpart so it will add incorrect variance`);
    const fastInputToggle = document.getElementById("fastInputToggle");
 
   if (fastInputToggle) {
