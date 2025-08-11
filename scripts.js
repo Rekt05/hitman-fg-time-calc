@@ -432,7 +432,7 @@ function toggleMSMode() {
   msMode = !msMode;
   localStorage.setItem("msMode", msMode);
   const alertMsg = msMode ? "on" : "off";
-  alert(`Millisecond mode has now been turned ${alertMsg}, currently this only works correctly when you insert a 5 start time under 5 minutes, just insert the score into the time column ex. 206107`);
+  alert(`Millisecond mode has now been turned ${alertMsg}, currently this only works correctly when you insert a 5 star time under 5 minutes, just insert the score into the time column ex. 206107`);
    const fastInputToggle = document.getElementById("fastInputToggle");
 
   if (fastInputToggle) {
