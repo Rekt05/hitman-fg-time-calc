@@ -157,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
   } else if (/^\d+$/.test(str)) {
     if (str.length <= 2) {
       const sec = parseInt(str, 10);
-      if (sec >= 60) return NaN;
       return sec;
     } else {
       const minPart = str.slice(0, -2);
@@ -445,3 +444,68 @@ function toggleMSMode() {
   }
   updateTimes();
 }
+
+const modal = document.getElementById("fastSplitModal");
+const grid = document.getElementById("expectationGrid");
+const btnConfigureFastSplit = document.getElementById("btnConfigureFastSplit");
+const btnSave = document.getElementById("saveExpectations");
+const btnClose = document.getElementById("closeModal");
+
+const storedExpectations = JSON.parse(localStorage.getItem("mapTimeExpectations"));
+if (storedExpectations) {
+  Object.assign(mapTimeExpectations, storedExpectations);
+}
+
+function openFastSplitConfig() {
+  grid.innerHTML = "";
+  for (const [map, digits] of Object.entries(mapTimeExpectations)) {
+    const div = document.createElement("div");
+    div.className = "expectation-item";
+    div.innerHTML = `
+      <span>${map}</span>
+      <input type="number" min="1" max="3" value="${digits}" data-map="${map}">
+    `;
+    grid.appendChild(div);
+  }
+  modal.style.display = "block";
+}
+
+function closeFastSplitConfig() {
+  modal.style.display = "none";
+}
+
+btnConfigureFastSplit.addEventListener("click", openFastSplitConfig);
+btnClose.addEventListener("click", closeFastSplitConfig);
+
+btnSave.addEventListener("click", () => {
+  const inputs = grid.querySelectorAll("input");
+  inputs.forEach(input => {
+    const map = input.dataset.map;
+    const val = parseInt(input.value, 10);
+    if (!isNaN(val)) {
+      mapTimeExpectations[map] = val;
+    }
+  });
+  localStorage.setItem("mapTimeExpectations", JSON.stringify(mapTimeExpectations));
+  closeFastSplitConfig();
+  alert("Fast splitting configured successfully!");
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) closeFastSplitConfig();
+});
+
+document.getElementById("resetFastSplit").addEventListener("click", () => {
+  const defaultValues = {
+    "Paris": 2, "Sapienza": 2, "Marrakesh": 2, "Bangkok": 2, "Colorado": 2, "Hokkaido": 2,
+    "Hawke's Bay": 3, "Miami": 2, "Santa Fortuna": 3, "Mumbai": 3, "Whittleton Creek": 3,
+    "Ambrose Island": 2, "Isle of Sgàil": 2, "New York": 3, "Haven Island": 2, "Dubai": 2,
+    "Dartmoor": 2, "Berlin": 2, "Chongqing": 2, "Mendoza": 2, "Romania": 3
+  };
+
+  Object.keys(defaultValues).forEach(level => {
+    mapTimeExpectations[level] = defaultValues[level];
+    const input = document.querySelector(`#fastSplitModal input[data-map="${level}"]`);
+    if (input) input.value = defaultValues[level];
+  });
+});

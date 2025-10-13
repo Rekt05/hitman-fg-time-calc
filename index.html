@@ -23,15 +23,30 @@
             <button id="btnSaveLink">Save as Link</button>
             <button onclick="toggleDarkMode()">Toggle Dark/Light Mode</button>
             <!--<button onclick="toggleMSMode()">(BETA) Toggle MS Mode</button>-->
-            <label for="rowCount">Number of Fields:</label>
-            <input type="number" id="rowCount" min="1" max="100" value="40" /></br>
-            <label title="When enabled, this allows you to input times without having to click tab or enter IF you enter an appropriate time.
-An appropriate time is an expected time for current trilogy runs - ex. Paris would expect a 2 digit time (2x seconds), where Santa Fortuna would expect a 3 digit time (1:xx)">
+            <label title="When enabled, this allows you to input times without having to click tab or enter to go to the next map field IF you enter an appropriate time.
+An appropriate time is whatever you decide using the 'Configure Fast Splitting' button below.">
             <input type="checkbox" id="fastInputToggle" /> Fast Splitting 
             <span class="explain">(?)</span></label>
+            <button id="btnConfigureFastSplit" style="margin-top: 10px;">Configure Fast Splitting</button>
+            <label for="rowCount">Number of Fields:</label>
+            <input type="number" id="rowCount" min="1" max="100" value="40" /></br>
 
             <p>Made by @Rekt05 on discord for fun, dm for suggestions or questions            
             </br></br>Inspired by Solderq35's <a href="https://github.com/solderq35/fg-time-calc" target="_blank" rel="noopener noreferrer">time calc</a></p>
+        </div>
+
+        <div id="fastSplitModal" class="modal">
+            <div class="modal-content">
+                <h2>Configure Fast Splitting - Based on Digits</h2>
+                <p>Select the amount of digits you need to insert for a map for it to automatically move on to the next map field, ex. if you insert a 2 next to paris you will need to insert a 2 digit number ex. 25 or 59, for 3 digits you can insert ex. 1:01 or 6:59.</p>
+                <div class="expectation-grid" id="expectationGrid"></div>
+
+                <div class="modal-actions">
+                <button id="saveExpectations">Save</button>
+                <button id="resetFastSplit">Reset</button>
+                <button id="closeModal">Close</button>
+                </div>
+            </div>
         </div>
 
         <div class="main-content">
