@@ -214,6 +214,15 @@ document.addEventListener("DOMContentLoaded", () => {
     updateTimes();
   });
 
+  document.getElementById("btnClearTimes").addEventListener("click", () => {
+  const currentCount = parseInt(localStorage.getItem("rowCount") || "40", 10);
+    for (let i = 1; i <= currentCount; i++) {
+      const timeInput = document.getElementById(`t${i}`);
+      timeInput.value = "";
+    }
+  updateTimes();
+  });
+
 function isSixDigitCode(s) {
   return /^\d{6}$/.test(s);
 }
@@ -458,15 +467,32 @@ if (storedExpectations) {
 
 function openFastSplitConfig() {
   grid.innerHTML = "";
-  for (const [map, digits] of Object.entries(mapTimeExpectations)) {
-    const div = document.createElement("div");
-    div.className = "expectation-item";
-    div.innerHTML = `
-      <span>${map}</span>
-      <input type="number" min="1" max="3" value="${digits}" data-map="${map}">
-    `;
-    grid.appendChild(div);
-  }
+
+  const entries = Object.entries(mapTimeExpectations);
+
+  const col1 = entries.slice(0, 6);
+  const col2 = entries.slice(6, 15);
+  const col3 = entries.slice(15, 21);
+
+  const groups = [col1, col2, col3];
+
+  groups.forEach(group => {
+    const colDiv = document.createElement("div");
+    colDiv.className = "expectation-column";
+
+    group.forEach(([map, digits]) => {
+      const div = document.createElement("div");
+      div.className = "expectation-item";
+      div.innerHTML = `
+        <span>${map}</span>
+        <input type="number" min="1" max="3" value="${digits}" data-map="${map}">
+        `;
+      colDiv.appendChild(div);
+    });
+
+    grid.appendChild(colDiv);
+  });
+
   modal.style.display = "block";
 }
 

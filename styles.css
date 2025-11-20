@@ -141,7 +141,7 @@ body.light-mode .explain {
   color: #fff;
   margin: 5% auto;
   padding: 20px;
-  width: 600px;
+  width: 750px;
   max-height: 80vh;
   overflow: hidden;
   border-radius: 12px;
@@ -152,7 +152,7 @@ body.light-mode .explain {
 
 .expectation-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px 20px;
   overflow-y: auto;
   flex: 1;
@@ -160,12 +160,19 @@ body.light-mode .explain {
   margin-bottom: 10px;
 }
 
+.expectation-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
 .expectation-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #333;
-  padding: 6px 10px;
+  padding: 10px 14px;
   border-radius: 8px;
 }
 
@@ -200,4 +207,10 @@ body.light-mode .explain {
 
 .modal-actions button:hover {
   background-color: #555;
+}
+
+/* makes the nud buttons always visible to match firefox on chrome and edge (i assume all chromium based browsers) */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+   opacity: 1;
 }
