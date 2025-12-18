@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
         i.style.color = "#e8e6e3";
     });
     yourLinkBox.placeholder = "Paste Your Splits Link - Both this site and solderq site links are supported";
-    comLinkBox.placeholder = "Paste Comparison Splits Link- Both this site and solderq site links are supported";
+    comLinkBox.placeholder = "Paste Comparison Splits Link - Both this site and solderq site links are supported";
     updateTimes();
   });
 });
