@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hitman Splits Comparison</title>
+    <link rel="stylesheet" href="compare.css" />
+    <script src="compare.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-panel">
+        <h1 class="side-title">Hitman Split Comparison</h1>
+        <button>Trilogy</button>
+        <button>Season 1</button>
+        <button>Season 2</button>
+        <button>Season 3</button>
+        <button>Patient Zero</button>
+        <button>Sarajevo Six</button>
+        <button id="btnClearTimes">Clear Times</button>
+        <button id="btnClearAll">Clear All Fields</button>
+        <button id="btnSaveLink">Save Comparison Link</button>
+        <label for="rowCount">Number of Fields:</label>
+        <input type="number" id="rowCount" min="1" max="100" value="21" />
+        <hr />
+        <a href="index.html"><button type="button">Go to Splits</button></a>
+      </div>
+
+      <div class="main-content">
+        <div class="your-splits">
+          <h1 class="section-title">Your Splits</h1>
+          <table class="link-wrapper-table">
+            <tr>
+              <td>
+                <input
+                  type="text"
+                  id="yourLink"
+                  class="split-link-input"
+                  placeholder="Paste Your Splits Link - Both this site and solderq site links are supported"
+                />
+              </td>
+            </tr>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th class="col-time">Time</th>
+                <th class="col-cum">Cumulative</th>
+                <th class="col-name">Level Name</th>
+              </tr>
+            </thead>
+            <tbody id="yourTable"></tbody>
+          </table>
+        </div>
+
+        <div class="comparision-splits">
+          <h1 class="section-title">Comparison Splits</h1>
+          <table class="link-wrapper-table">
+            <tr>
+              <td>
+                <input
+                  type="text"
+                  id="comLink"
+                  class="split-link-input"
+                  placeholder="Paste Comparison Splits Link- Both this site and solderq site links are supported"
+                />
+              </td>
+            </tr>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th class="col-time">Time</th>
+                <th class="col-cum">Cumulative</th>
+                <th class="col-name">Level Name</th>
+              </tr>
+            </thead>
+            <tbody id="comBody"></tbody>
+          </table>
+        </div>
+
+        <div class="delta">
+          <h1 class="section-title">Delta</h1>
+          <table class="link-wrapper-table">
+            <tr>
+              <td><div class="delta-header-spacer"></div></td>
+            </tr>
+          </table>
+          <table class="delta-table">
+            <thead>
+              <tr>
+                <th class="col-delta">Time</th>
+              </tr>
+            </thead>
+            <tbody id="delBody"></tbody>
+          </table>
+          <div class="result-container">
+            <h2>Total Delta:</h2>
+            <input type="text" id="delResult" readonly />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
