@@ -11,12 +11,17 @@ body.light-mode {
     color: #000000;
 }
 
-header h1 {
+.left-panel h1 {
     text-align: center;
     padding: 20px 0;
     background-color: #202324;
     color: #e8e6e3;
     margin: 0;
+}
+
+body.light-mode .left-panel h1 {
+    background-color: #f0f0f0;
+    color: #000;
 }
 
 body.light-mode header h1 {
@@ -30,7 +35,7 @@ body.light-mode header h1 {
 }
 
 .left-panel {
-    width: 200px;
+    width: 300px;
     padding: 20px;
     background-color: #1f2223;
 }
@@ -71,8 +76,9 @@ table {
 }
 
 th, td {
-    border: 1px solid #3c3f41;
-    padding: 8px;
+    border-left: 1px solid #3c3f41;
+    border-right: 1px solid #3c3f41;
+    padding: 6px;
     text-align: center;
 }
 
