@@ -113,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const yCumInput = document.getElementById(`yc${i}`);
       const cCumInput = document.getElementById(`cc${i}`);
       const dInput = document.getElementById(`dt${i}`);
+      const dCumInput = document.getElementById(`dc${i}`);
 
       const ySec = parseCustomTime(yTimeInput.value);
       const cSec = parseCustomTime(cTimeInput.value);
@@ -142,8 +143,12 @@ document.addEventListener("DOMContentLoaded", () => {
         dInput.value = (diff > 0 ? "+" : "") + formatTimeString(diff);
         dInput.style.color =
           diff < 0 ? "#50fa7b" : diff > 0 ? "#ff5555" : "#e8e6e3";
+        dCumInput.value = (deltaSum > 0 ? "+" : "") + formatTimeString(deltaSum);
+        dCumInput.style.color =
+          deltaSum < 0 ? "#50fa7b" : deltaSum > 0 ? "#ff5555" : "#e8e6e3";
       } else {
         dInput.value = "";
+        dCumInput.value = "";
       }
     }
 
@@ -164,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 1; i <= count; i++) {
       yourTable.innerHTML += `<tr><td><input type="text" id="yt${i}" /></td><td><input type="text" id="yc${i}" readonly /></td><td><input type="text" id="yln${i}" /></td></tr>`;
       comBody.innerHTML += `<tr><td><input type="text" id="ct${i}" /></td><td><input type="text" id="cc${i}" readonly /></td><td><input type="text" id="cln${i}" /></td></tr>`;
-      delBody.innerHTML += `<tr><td><input type="text" id="dt${i}" readonly style="font-weight:bold" /></td></tr>`;
+      delBody.innerHTML += `<tr><td><input type="text" id="dt${i}" readonly style="font-weight:bold" /></td><td><input type="text" id="dc${i}" readonly style="font-weight:bold" /></td></tr>`;
     }
     bindDynamicEvents();
   }
@@ -382,7 +387,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnClearAll").addEventListener("click", () => {
     document.querySelectorAll('input[type="text"]').forEach((i) => {
       i.value = "";
-      if (i.id.startsWith("dt") || i.id === "delResult")
+      if (i.id.startsWith("dt") || i.id.startsWith("dc") || i.id === "delResult")
         i.style.color = "#e8e6e3";
     });
     yourLinkBox.placeholder = "Paste Your Splits Link - Both this site and solderq site links are supported";

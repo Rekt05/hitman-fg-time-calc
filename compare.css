@@ -44,7 +44,7 @@ body {
 }
 
 .delta {
-  flex: 1;
+  flex: 2;
 }
 
 .section-title {
@@ -100,8 +100,9 @@ td {
   width: 33.33%;
 }
 
-.col-delta {
-  width: 100%;
+.col-delta,
+.col-delta-cum {
+  width: 50%;
 }
 
 input[type="text"] {
@@ -117,6 +118,7 @@ input[type="text"] {
 .result-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   margin-top: 15px;
 }
@@ -170,7 +172,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 #delResult,
-input[id^="dt"] {
+input[id^="dt"],
+input[id^="dc"] {
   background-color: #1a1c1d !important;
   border: 1px solid #3c3f41;
 }
