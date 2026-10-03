@@ -415,24 +415,55 @@ const mapTimeExpectations = {
   "Dartmoor": 2, "Berlin": 2, "Chongqing": 2, "Mendoza": 2, "Romania": 3
 };
 
-document.addEventListener("keyup", function (e) {
+function digitCount(value) {
+  return (value || "").replace(/\D/g, "").length;
+}
+
+function isTimeInput(el) {
+  return !!(el && el.tagName === "INPUT" && el.name && el.name.startsWith("time"));
+}
+
+function isFastSplitOn() {
   const fastInputToggle = document.getElementById("fastInputToggle");
-  if (!fastInputToggle || !fastInputToggle.checked) return;
-  if (e.target.tagName !== "INPUT" || e.target.type !== "text") return;
+  return !!(fastInputToggle && fastInputToggle.checked);
+}
 
-  const currentInput = e.target;
-  const mapName = currentInput.dataset.mapname;
-  const expectedDigits = mapTimeExpectations[mapName];
+function focusTimeInput(from, delta) {
+  const allInputs = [...document.querySelectorAll('input[name^="time"]')];
+  const currentIndex = allInputs.indexOf(from);
+  const nextIndex = currentIndex + delta;
+  if (currentIndex === -1 || nextIndex < 0 || nextIndex >= allInputs.length) return false;
+  allInputs[nextIndex].focus();
+  return true;
+}
 
-  if (!expectedDigits) return;
+document.addEventListener("beforeinput", function (e) {
+  if (!isTimeInput(e.target)) return;
+  const start = e.target.selectionStart ?? 0;
+  const end = e.target.selectionEnd ?? 0;
+  const selectedDigits = digitCount(e.target.value.slice(start, end));
+  e.target.dataset.prevDigits = String(Math.max(0, digitCount(e.target.value) - selectedDigits));
+});
 
-  const digitsOnly = currentInput.value.replace(/\D/g, "");
-  if (digitsOnly.length === expectedDigits) {
-    const allInputs = [...document.querySelectorAll('input[name^="time"]')];
-    const currentIndex = allInputs.indexOf(currentInput);
-    if (currentIndex !== -1 && currentIndex + 1 < allInputs.length) {
-      allInputs[currentIndex + 1].focus();
-    }
+document.addEventListener("input", function (e) {
+  if (!isFastSplitOn() || !isTimeInput(e.target)) return;
+  if (!e.inputType || !e.inputType.startsWith("insert")) return;
+
+  const expectedDigits = mapTimeExpectations[e.target.dataset.mapname];
+  const prevDigits = Number(e.target.dataset.prevDigits);
+  if (!expectedDigits || Number.isNaN(prevDigits) || prevDigits >= expectedDigits) return;
+  if (digitCount(e.target.value) !== expectedDigits) return;
+
+  focusTimeInput(e.target, 1);
+});
+
+document.addEventListener("keydown", function (e) {
+  if (!isFastSplitOn() || !isTimeInput(e.target)) return;
+  if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+  if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+
+  if (focusTimeInput(e.target, e.key === "ArrowDown" ? 1 : -1)) {
+    e.preventDefault();
   }
 });
 
@@ -520,6 +551,75 @@ btnSave.addEventListener("click", () => {
 window.addEventListener("click", (e) => {
   if (e.target === modal) closeFastSplitConfig();
 });
+
+(function () {
+  const code = "drp";
+  let held = false;
+  let buffer = "";
+  let typedWhileHeld = false;
+  const img = document.getElementById("drpImage");
+  if (!img) return;
+
+  function placeCan() {
+    const table = document.querySelector(".main-content table");
+    if (!table) return;
+    const tableRight = table.getBoundingClientRect().right;
+    img.style.left = ((tableRight + window.innerWidth) / 2) + "px";
+  }
+
+  function applyDrp(on) {
+    document.body.classList.toggle("drp", on);
+    img.classList.toggle("is-visible", on);
+    if (on) placeCan();
+  }
+
+  function setDrp(on) {
+    applyDrp(on);
+    localStorage.setItem("drp", on ? "true" : "false");
+  }
+
+  applyDrp(localStorage.getItem("drp") === "true");
+  window.addEventListener("resize", placeCan);
+
+  document.addEventListener("mousedown", (e) => {
+    if (e.button !== 2) return;
+    held = true;
+    buffer = "";
+    typedWhileHeld = false;
+  });
+
+  document.addEventListener("mouseup", (e) => {
+    if (e.button !== 2) return;
+    held = false;
+    buffer = "";
+    setTimeout(() => {
+      typedWhileHeld = false;
+    }, 0);
+  });
+
+  window.addEventListener("blur", () => {
+    held = false;
+    buffer = "";
+  });
+
+  document.addEventListener("contextmenu", (e) => {
+    if (!typedWhileHeld) return;
+    e.preventDefault();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!held) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key.length !== 1) return;
+    e.preventDefault();
+    typedWhileHeld = true;
+    buffer = (buffer + e.key.toLowerCase()).slice(-code.length);
+    if (buffer === code) {
+      setDrp(!document.body.classList.contains("drp"));
+      buffer = "";
+    }
+  }, true);
+})();
 
 document.getElementById("resetFastSplit").addEventListener("click", () => {
   const defaultValues = {

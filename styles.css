@@ -19,6 +19,10 @@ body.light-mode {
     margin: 0;
 }
 
+body.drp .left-panel h1 {
+    padding: 8px 0 20px;
+}
+
 body.light-mode .left-panel h1 {
     background-color: #f0f0f0;
     color: #000;
@@ -32,6 +36,10 @@ body.light-mode header h1 {
 .container {
     display: flex;
     min-height: 80vh;
+}
+
+body.drp .container {
+    min-height: 100vh;
 }
 
 .left-panel {
@@ -75,11 +83,36 @@ table {
     margin: 0 auto 30px auto;
 }
 
+body.drp table {
+    margin: 8px auto 30px auto;
+}
+
 th, td {
     border-left: 1px solid #3c3f41;
     border-right: 1px solid #3c3f41;
     padding: 6px;
     text-align: center;
+}
+
+body.drp th,
+body.drp td {
+    padding: 4px 6px;
+}
+
+body.drp thead tr:first-child th {
+    border-top: 1px solid #3c3f41;
+    padding-top: 14px;
+    padding-bottom: 10px;
+}
+
+body.drp tbody tr:last-child td {
+    border-bottom: 1px solid #3c3f41;
+    padding-bottom: 14px;
+}
+
+body.drp.light-mode th,
+body.drp.light-mode td {
+    border-color: #aaa;
 }
 
 input[type="text"] {
@@ -213,6 +246,23 @@ body.light-mode .explain {
 
 .modal-actions button:hover {
   background-color: #555;
+}
+
+.drp-image {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  height: min(46vh, 340px);
+  width: auto;
+  transform: translate(-50%, -50%);
+  z-index: 40;
+  pointer-events: none;
+  user-select: none;
+}
+
+.drp-image.is-visible {
+  display: block;
 }
 
 /* makes the nud buttons always visible to match firefox on chrome and edge (i assume all chromium based browsers) */
